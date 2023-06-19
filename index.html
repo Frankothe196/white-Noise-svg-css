@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Noise Background/Effect</title>
+    <style>
+
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        #NoiseCanvas{
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            width: calc(100%+50px);
+            height: calc(100%+50px);
+            background-repeat: no-repeat;
+            background: repeating-linear-gradient(#000, #000 50%,#fff 50%,#fff);
+            background-size: 4px 4px;
+            filter: url(#noise) opacity(0.2);
+            pointer-events: none;
+        }
+
+        .NoiseSVG{
+            width: 0;
+            height: 0;
+        }
+        
+        .Hero{
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1557991666-3dc7eae97614?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80');
+            background-size: cover;
+        }
+        @media not all and (min-resolution:.001dpcm){
+            #NoiseCanvas{
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <Section class="Hero">
+        <div id="NoiseCanvas"></div>
+    </Section>
+    <svg class="NoiseSVG">
+        <filter id="noise">
+            <feTurbulence>
+                <animate attributeName="baseFrequency" dur="20s" values="0.2 0.2; 0.8 0.8; 0.2 0.2;" repeatCount="indefinite"></animate>
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" scale="60"></feDisplacementMap>
+        </filter>
+    </svg>
+</body>
+</html>
